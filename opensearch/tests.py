@@ -1,6 +1,7 @@
 from django.test import TestCase
 import re
-import yaml 
+import os
+import subprocess
 
 # Create your tests here.
 
@@ -36,4 +37,12 @@ def replace_inplace():
 
     print(content)
 
-replace_inplace()
+def check_file():
+    res = os.path.exists("/Users/zaniu/Documents/code/ml-commons/plugin/build/distributions/opensearch-ml-2.4.1.0-SNAPSHOT.zip")
+    print(res)
+
+def check_shell_result():
+    res = subprocess.run("ls -a", shell=True)
+    print(res.returncode)
+
+check_shell_result()

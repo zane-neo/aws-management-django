@@ -19,6 +19,7 @@ from my_app import views as my_app_view
 from restart import views as restart_view
 from instance_manager import views as instance_manager_view
 from opensearch import views as opensearch_view
+from install_plugins import views as install_plugins_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +27,7 @@ urlpatterns = [
     path('application/<str:operation>', restart_view.index, name= "application"),
     path('instance/<str:action>', instance_manager_view.index, name="instance_manager"),
     path('cluster_node_status/_cat/nodes', opensearch_view.index, name='opensearch_cluster_nodes_status'),
-    path('node_creation/<str:creation_type>', opensearch_view.index1, name='node_creation')
+    path('node_creation/<str:creation_type>', opensearch_view.index1, name='node_creation'),
+    path('install_plugin/<str:plugin_type>', install_plugins_view.index, name='install_plugin_index'),
+    path('install_plugin_file_list/<str:plugin_name>', install_plugins_view.fetch_selectible_files, name='install_plugin_fetch_files')
 ]
