@@ -17,11 +17,18 @@ instance_base_specification = {
     "m5.large": 8,
     "m5.xlarge": 16,
     "m5.2xlarge": 32,
+    "m5.4xlarge": 64,
     "c6g.large": 4,
     "c6g.12xlarge": 96,
     "c5.12xlarge": 96,
     "r6g.large": 16,
-    "r5.12xlarge": 384
+    "r5.12xlarge": 384,
+    "r6g.4xlarge": 128,
+    "c6.12xlarge": 96,
+    "r5.8xlarge": 256,
+    "r5.16xlarge": 512,
+    "c4.2xlarge": 15,
+    "c5.2xlarge": 16
 }
 m5_series = [1, 2, 4, 8, 12, 16, 24]
 c6g_series = [1, 2, 4, 6, 12, 16]
@@ -168,7 +175,8 @@ def create_instance(create_count, instance_type, ebs_size, node_purpose, group_n
                 },
             },
         ],
-        ImageId='ami-072bfb8ae2c884cc4',
+        ImageId='ami-072bfb8ae2c884cc4' if opensearch_platform == 'x64' else 'ami-0e6a6d31c24757ae2', 
+        # ImageId='ami-0e6a6d31c24757ae2', # arm
         MinCount=1,
         MaxCount=create_count,
         InstanceType=instance_type,

@@ -66,11 +66,11 @@ node.roles: [ data, ingest, cluster_manager ]
 # Pass an initial list of hosts to perform discovery when this node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-discovery.seed_hosts: ["ip-172-31-40-119.ap-northeast-1.compute.internal"]
+discovery.seed_hosts: ["ip-172-31-31-133.ap-northeast-1.compute.internal","ip-172-31-21-206.ap-northeast-1.compute.internal"]
 #
 # Bootstrap the cluster using an initial set of cluster-manager-eligible nodes:
 #
-cluster.initial_cluster_manager_nodes: ["ip-172-31-40-119.ap-northeast-1.compute.internal"]
+cluster.initial_cluster_manager_nodes: ["ip-172-31-31-133.ap-northeast-1.compute.internal","ip-172-31-21-206.ap-northeast-1.compute.internal"]
 #
 # For more information, consult the discovery and cluster formation module documentation.
 #
