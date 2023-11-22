@@ -4,6 +4,6 @@ from django.test import TestCase
 
 import os
 
-res = os.listdir('/Users/zaniu/Documents/code/ml-commons/plugin/build/distributions')
+res = os.listdir('~/Documents/code/ml-commons/plugin/build/distributions')
 print(type(res))
 print(res)
