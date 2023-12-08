@@ -3,3 +3,4 @@ nohup.log
 opensearch.yml
 1
 **/*.pyc
+.DS_Store

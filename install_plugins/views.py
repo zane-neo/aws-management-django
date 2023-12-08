@@ -8,8 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
-ml_commons_base_path = "~/Documents/code/ml-commons/plugin/build/distributions"
-neural_search_base_path = "~/Documents/code/neural-search/build/distributions"
+ml_commons_base_path = "/Users/zaniu/Documents/code/ml-commons/plugin/build/distributions"
+neural_search_base_path = "/Users/zaniu/Documents/code/neural-search/build/distributions"
 
 @csrf_exempt
 def index(request, plugin_type):

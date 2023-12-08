@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sh ~/Documents/code/shells/kill_9200.sh
+sh /Users/zaniu/Documents/code/shells/kill_9200.sh

@@ -46,18 +46,25 @@ def index(request):
     print("built final url is: {}".format(f_url))
     try:
         res = requests.get(f_url, headers=header)
-        res_list = res.json()
-        result = []
-        for i in res_list: 
-            result.append(i)
-        ret = {
-            "result": result
-        }
+        # print("res' status_code is: {}".format(res.status_code))
+        # print("error message is:{}".format(res.text))
+        if res.status_code != 200:
+            ret = {
+                "error": res.text
+            }
+        else: 
+            print("entering this fucking place? why?")
+            res_list = res.json()
+            result = []
+            for i in res_list: 
+                result.append(i)
+            ret = {
+                "result": result
+            }
     except Exception as e:
         ret = {
-            "error": "fetch failed"
+            "error": str(e)
         }
-
     return success_response(ret)
 
 def success_response(ret):
@@ -243,13 +250,13 @@ def execute_shell_scripts(public_ip_address):
     res = os.system(test_command)
     while res != 0:
         res = os.system(test_command)
-    command = "~/Documents/code/shells/transfer_install_scripts.sh {}".format(public_ip_address)
+    command = "/Users/zaniu/Documents/code/shells/transfer_install_scripts.sh {}".format(public_ip_address)
     print('executing the transfer command: {}'.format(command))
     os.system(command)
 
 
 def create_jvm_file(memory):
-    with open('~/Documents/code/shells/jvm.options.bak', 'r') as jvm_file:
+    with open('/Users/zaniu/Documents/code/shells/jvm.options.bak', 'r') as jvm_file:
         jvm_options = jvm_file.read()
         allocate_memory = memory / 2
         if allocate_memory < 1:
@@ -258,7 +265,7 @@ def create_jvm_file(memory):
             allocate_memory_str = str(int(allocate_memory)) + 'g'
         jvm_options = jvm_options.replace('-Xms1g', '-Xms' + allocate_memory_str)
         jvm_options = jvm_options.replace('-Xmx1g', '-Xmx' + allocate_memory_str)
-        with open('~/Documents/code/shells/jvm.options', 'w') as tmp_jvm:
+        with open('/Users/zaniu/Documents/code/shells/jvm.options', 'w') as tmp_jvm:
             tmp_jvm.write(jvm_options)
 
 
@@ -271,7 +278,7 @@ def create_opensearch_yml_file(instance, node_purpose, cluster_ips):
         for ip in cluster_ips_array:
             ips_str += '"' + ip + '",'
         ips_str += '"'+ instance.private_dns_name + '"'
-    with open('~/Documents/code/shells/opensearch.yml.bak', 'r') as opensearch_yml:
+    with open('/Users/zaniu/Documents/code/shells/opensearch.yml.bak', 'r') as opensearch_yml:
         opensearch_yml_content = opensearch_yml.read()
         opensearch_yml_content = opensearch_yml_content.replace('# cluster.name: mycluster', 'cluster.name: mycluster')
         opensearch_yml_content = opensearch_yml_content.replace('discovery.seed_hosts: []',
@@ -289,7 +296,7 @@ def create_opensearch_yml_file(instance, node_purpose, cluster_ips):
 
         opensearch_yml_content = opensearch_yml_content.replace('node.roles: []', 'node.roles: [ ' + node_roles + ' ]')
 
-        with open('~/Documents/code/shells/opensearch.yml', 'w') as tmp_opensearch_yml:
+        with open('/Users/zaniu/Documents/code/shells/opensearch.yml', 'w') as tmp_opensearch_yml:
             tmp_opensearch_yml.write(opensearch_yml_content)
 
 

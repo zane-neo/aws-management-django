@@ -22,6 +22,8 @@ def simple_describe():
             public_dns_name = instance['PublicDnsName']
             private_dns_name = instance['PrivateDnsName']
             instance_type = instance['InstanceType']
+            launch_time = instance['LaunchTime']
+            # print(launch_time)
             tags = instance['Tags']
             for tag in tags:
                 if tag['Key'] == 'Name':
@@ -50,7 +52,8 @@ def simple_describe():
                 'instance_type': instance_type,
                 'instance_state': instance_state,
                 'group_name': group_name,
-                'opensearch_running': os_running
+                'opensearch_running': os_running,
+                'launch_time': launch_time
             }
             print('current instance id is: {}, os running status is: {}'.format(instance_id, os_running))
             cluster.append(single_instance)

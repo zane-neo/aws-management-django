@@ -17,13 +17,13 @@ def index(request, operation):
     elif operation == 'installml':
         plugin_version = parse_plugin_version(public_dns_name)
         print("parsed plugin version is: {}".format(plugin_version))
-        if not os.path.exists("~/Documents/code/ml-commons/plugin/build/distributions/opensearch-ml-{}-SNAPSHOT.zip".format(plugin_version)):
+        if not os.path.exists("/Users/zaniu/Documents/code/ml-commons/plugin/build/distributions/opensearch-ml-{}-SNAPSHOT.zip".format(plugin_version)):
             response = JsonResponse({"error": "plugin version is empty!"}, content_type="application/json", safe=False)
             response['Access-Control-Allow-Origin'] = '*'
             return response
         else:
             command = """
-                sh ~/Documents/code/shells/scp_to_remote.sh ~/Documents/code/ml-commons/plugin/build/distributions/opensearch-ml-{}-SNAPSHOT.zip {}
+                sh /Users/zaniu/Documents/code/shells/scp_to_remote.sh /Users/zaniu/Documents/code/ml-commons/plugin/build/distributions/opensearch-ml-{}-SNAPSHOT.zip {}
                 ssh -i ~/zaniu-ec2-nopass.pem ec2-user@{} << EOF
                     sh ~/kill_opensearch.sh
                     ./install_ml_plugin.sh
@@ -31,13 +31,13 @@ def index(request, operation):
             """.format(plugin_version, public_dns_name, public_dns_name)
     elif operation == 'installneural':
         plugin_version = parse_plugin_version(public_dns_name)
-        if not os.path.exists("~/Documents/code/neural-search/build/distributions/opensearch-neural-search-{}-SNAPSHOT.zip".format(plugin_version)):
+        if not os.path.exists("/Users/zaniu/Documents/code/neural-search/build/distributions/opensearch-neural-search-{}-SNAPSHOT.zip".format(plugin_version)):
             response = JsonResponse({"error": "plugin version is empty!"}, content_type="application/json", safe=False)
             response['Access-Control-Allow-Origin'] = '*'
             return response
         else:
             command = """
-            sh ~/Documents/code/shells/scp_to_remote.sh ~/Documents/code/neural-search/build/distributions/opensearch-neural-search-{}-SNAPSHOT.zip {}
+            sh /Users/zaniu/Documents/code/shells/scp_to_remote.sh /Users/zaniu/Documents/code/neural-search/build/distributions/opensearch-neural-search-{}-SNAPSHOT.zip {}
                 ssh -i ~/zaniu-ec2-nopass.pem ec2-user@{} << EOF
                     ./install_neural_search_plugin.sh
                     sh kill_and_restart.sh > /dev/null 2>&1 &
@@ -50,7 +50,7 @@ def index(request, operation):
         """.format(public_dns_name)
     elif operation == 'reinstallos':
         command = """
-        sh ~/Documents/code/shells/scp_to_remote.sh ~/Documents/code/shells/config.properties {}
+        sh /Users/zaniu/Documents/code/shells/scp_to_remote.sh /Users/zaniu/Documents/code/shells/config.properties {}
             ssh -i ~/zaniu-ec2-nopass.pem ec2-user@{} << EOF
                 ./install_opensearch.sh
                 sh kill_and_restart.sh > /dev/null 2>&1 &
@@ -62,7 +62,7 @@ def index(request, operation):
         """.format(public_dns_name)
     elif operation == 'updateConfig':
         command = """
-            sh ~/Documents/code/shells/scp_to_remote.sh ~/Documents/code/shells/config.properties {}
+            sh /Users/zaniu/Documents/code/shells/scp_to_remote.sh /Users/zaniu/Documents/code/shells/config.properties {}
         """.format(public_dns_name)
     # To run ssh port forwarding in background: https://unix.stackexchange.com/a/685276
     elif operation == 'createSSHTunnel':
